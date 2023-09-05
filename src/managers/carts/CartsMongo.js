@@ -8,9 +8,9 @@ class CartsMongo {
           return error  
         }
     }
-    async getCartById(id){
+    async getCartById(cid){
         try {
-          const cart = await CartModel.findById(id).populate('products',['title','price','thumbnail','code'])
+          const cart = await cartsModel.findById(cid).populate('products',['title','price','code','quantity'])
           return cart  
         } catch (error) {
           return error   
@@ -18,16 +18,16 @@ class CartsMongo {
     }
     async createCart(obj){
         try {
-          const cart = await CartModel.create(obj)  
+          const cart = await cartsModel.create(obj)  
           return cart 
         } catch (error) {
           return error   
         }
     }
 
-    async cartDeleted(id){ 
+    async cartDeleted(cid){ 
         try {
-          const response = await CartModel.findByIdAndDelete(id)
+          const response = await cartsModel.findByIdAndDelete(cid)
           return response  
         } catch (error) {
           return error  
@@ -41,6 +41,30 @@ class CartsMongo {
         } catch (error) {
           return error  
         }
+    }
+
+    async productDelete(cid,pid){
+      try {
+        const cart = await cartsModel.findById(cid)
+        if(!cart) throw new Error('Cart not found')
+
+        const response = await cartsModel.updateOne({_id:cid},{$pull:{products:pid}})
+        return response
+      } catch (error) {
+        return error 
+      }
+    }
+
+    async updateProduct(cid,pid,quantity){
+     try{ 
+       const cart = await cartsModel.findById(cid)
+       if(!cart) throw new Error('Cart not found')
+
+       const response = await cartsModel.findById(cid).updateOne({_id:pid},{$inc:{quantity:quantity}})
+       return response
+     }catch(error){
+      return error
+     }
     }
 }
 
