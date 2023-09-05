@@ -12,6 +12,17 @@ router.post('/',async(req,res)=>{
     }
 })
 
+router.post('/:cid',async(req,res)=>{
+    const {cid} = req.params
+    try {
+      const newProduct = await cartMongo.addProduct(cid,req.body)
+      console.log(newProduct)
+      res.status(200).json({message:'Product added'})  
+    } catch (error) {
+        res.status(500).json({error})
+    }
+})
+
 
 
 router.delete('/:cid/products/:pid',async(req,res)=>{

@@ -1,11 +1,13 @@
-import {productsModels} from '../../db/models/porducts.model.js';
+import {productsModel} from '../../db/models/porducts.model.js';
 
 class ProductsMongo{
-    async getProducts(limit,page,sort,query){
+    async getProducts(limit,page,sort){
         try {
-         const result = await productsModels.paginate(
-          {limit,page,sort,query}
+          
+         const result = await productsModel.paginate(
+          {limit,page,sort}
          )
+         console.log(result)
          const info = {
            //status: ,//no se si hacerlo con un custom return o si hay un return de default que lo devuelve
            payload: result.docs,
@@ -26,7 +28,7 @@ class ProductsMongo{
 
     async addproduct(obj){
         try {
-          const newProduct = await productsModels.create(obj)
+          const newProduct = await productsModel.create(obj)
           return newProduct  
         } catch (error) {
           return error  
@@ -35,7 +37,7 @@ class ProductsMongo{
 
     async getProductById(pid){
         try {
-          const product = await productsModels.findById(pid)
+          const product = await productsModel.findById(pid)
           return product      
         } catch (error) {
           return error   
@@ -44,7 +46,7 @@ class ProductsMongo{
 
     async updateProduct(pid,obj){
         try {
-          const response = await productsModels.updateOne({_id:pid},{...obj})
+          const response = await productsModel.updateOne({_id:pid},{...obj})
           return response  
         } catch (error) {
           return error   
@@ -53,7 +55,7 @@ class ProductsMongo{
 
     async deleteProduct(pid){
         try {
-          const response = await productsModels.findByIdAndDelete(pid)
+          const response = await productsModel.findByIdAndDelete(pid)
           return response  
         } catch (error) {
           return error  

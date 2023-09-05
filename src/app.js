@@ -3,7 +3,7 @@ import handlebars from 'express-handlebars';
 import { __dirname } from './utils.js';
 import productsRouter from './routes/product.router.js';
 import cartsRouter from './routes/cart.router.js';
-import viewsRouter from './routes/views.router.js';
+//import viewsRouter from './routes/views.router.js';
 import { Server } from 'socket.io';
 import './db/dbConfig.js';
 
@@ -20,7 +20,7 @@ app.set('view engine','handlebars')
 
 app.use('/api/products',productsRouter)
 app.use('/api/cart',cartsRouter)
-app.use('/api/views',viewsRouter)
+//app.use('/api/views',viewsRouter)
 
 const PORT = 8080
 

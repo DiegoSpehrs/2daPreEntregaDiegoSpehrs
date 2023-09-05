@@ -5,8 +5,8 @@ const router = Router()
 
 router.get('/',async(req,res)=>{
     try {
-      const {limit=10,page=1,sort,query} = req.query
-      const products = await productMongo.getProducts(limit,page,sort,query)
+      const {limit,page,sort} = req.query
+      const products = await productMongo.getProducts(limit,page,sort)
       res.status(200).json({products})
 
     } catch (error) {
@@ -52,4 +52,6 @@ router.delete('/:pid',async(req,res)=>{
         res.status(500).json({error})
     }
 })
+
+export default router
 

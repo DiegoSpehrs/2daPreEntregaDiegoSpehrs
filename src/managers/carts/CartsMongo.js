@@ -66,6 +66,15 @@ class CartsMongo {
       return error
      }
     }
+
+    async addProduct(cid,pid){
+      try {
+        const cart = await cartsModel.findById(cid).updateOne({$push:{products:pid}})
+        return cart
+      } catch (error) {
+        return error
+      }
+    }
 }
 
 export const cartMongo = new CartsMongo()

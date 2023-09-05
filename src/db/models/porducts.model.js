@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const productsSchema = new Schema({
+const productsSchema = new mongoose.Schema({
     title:{
         type: 'string',
         require: true,
@@ -17,6 +17,11 @@ const productsSchema = new Schema({
     thumbnail:{
         type: 'string',
         require: true
+    },
+    category:{
+        type: 'string',
+        require: true,
+        index: true
     },
     code:{
         type: 'string',
