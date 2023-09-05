@@ -10,7 +10,9 @@ const stock = document.getElementById('productStock')
 const idProduct = document.getElementById('idProduct')
 
 const formularioDeletProduct = document.getElementById('formDeleteProduct')
+const divInRealTime = document.getElementById('productsInRealTime')
 const id = document.getElementById('idProductDeleted')
+
 
 
 
@@ -46,7 +48,7 @@ socketClient.on('addProductSuccess',async(product)=>{
                         <p> id: ${product.id}</p>
                     </div>`
     ;
-    productsInRealTime.innerHTML = newProduct
+    divInRealTime.innerHTML = newProduct
 })
 
 
