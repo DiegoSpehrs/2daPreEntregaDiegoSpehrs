@@ -3,7 +3,11 @@ import {productsModel} from '../../db/models/porducts.model.js';
 class ProductsMongo{
     async getProducts(limit,page,sort){
         try {
-          
+          if(!limit,!page,!sort){
+            limit = 10;
+            page = 1;
+            sort = ASC;
+          }
          const result = await productsModel.paginate(
           {limit,page,sort}
          )

@@ -4,8 +4,9 @@ import {cartMongo} from '../managers/carts/CartsMongo.js';
 const router = Router()
 
 router.post('/',async(req,res)=>{
+    const cartData = req.body
     try{
-        const createCart = await cartMongo.createCart()
+        const createCart = await cartMongo.createCart(cartData)
         res.status(200).json({message:'Cart',cart:createCart})
     }catch(error){
         res.status(500).json({error})
